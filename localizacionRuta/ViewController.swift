@@ -7,10 +7,13 @@
 
 import UIKit
 import MapKit
+import CoreLocation
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, CLLocationManagerDelegate{
     
     var listaLugares: [cLugar] = []
+    //let direcciones = MKDirections()
+    let localizacionManager = CLLocationManager()
     
     @IBOutlet weak var miMapa: MKMapView!
     
@@ -18,6 +21,17 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+
+        localizacionManager.delegate = self
+        
+        //elegir el grado de decision
+        localizacionManager.desiredAccuracy = kCLLocationAccuracyBest
+        //solicito autorizacion
+        localizacionManager.requestAlwaysAuthorization()
+        //inicia la localizacion
+        localizacionManager.startUpdatingLocation()
+        
         //Introducimos las coordenadas
         miMapa.centerCoordinate = CLLocationCoordinate2D(latitude: 40.29410018211713, longitude: -3.7453012964888743)
         
@@ -44,6 +58,7 @@ class ViewController: UIViewController {
         //ver la region definida
         miMapa.setRegion(Region, animated: true)
         
+      
         /*let conservatorio = MKPointAnnotation()
        
         conservatorio.coordinate = CLLocationCoordinate2D(latitude: 40.29359674714678, longitude: -3.7461206525033224)
@@ -69,6 +84,14 @@ class ViewController: UIViewController {
       
         
     }
+    func locationManager (_ localizacionManager: CLLocationManager, didUpdateLocations locations:[CLLocation]) {
+        // localizacion
+        print("localizacion del usuario \(locations)")
+        print("latitud \(locations[0].coordinate.latitude)")
+        print("longitud \(locations[0].coordinate.longitude)")
+        
+    }
+    
     
     
 }
