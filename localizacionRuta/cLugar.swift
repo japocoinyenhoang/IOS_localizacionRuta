@@ -17,9 +17,9 @@ class cLugar {
     
     //inicializo las variables con el constructor
     init( titulo: String, descripcion: String, latitud: Double, longitud: Double) {
-        self.titulo = ""
-        self.descripcion = ""
-        self.latitud = 0
-        self.longitud = 0
+        self.titulo = titulo
+        self.descripcion = descripcion
+        self.latitud = latitud
+        self.longitud = longitud
     }
 }
